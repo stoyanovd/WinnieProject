@@ -41,13 +41,17 @@ public class ToYandexMoney extends Activity {
         final TextView yandexMoneyNumber = (TextView) findViewById(R.id.yandexMoneyNumber);
         yandexMoneyNumber.setText(getIntent().getStringExtra("yandexMoneyNum"));
 
-        final EditText sum = (EditText) findViewById(R.id.sum);
-        Button buttonPay = (Button) findViewById(R.id.buttonTransferToPhone);
+        final EditText sum = (EditText) findViewById(R.id.sumToYandexMoney);
+        Button buttonPay = (Button) findViewById(R.id.buttonTransferToYandexMoneyEnd);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BigDecimal sumTransfer = new BigDecimal(sum.getText().toString());
-                makeTransfer(sumTransfer, yandexMoneyNumber.getText().toString());
+                try {
+                    BigDecimal sumTransfer = new BigDecimal(sum.getText().toString());
+                    makeTransfer(sumTransfer, yandexMoneyNumber.getText().toString());
+                } catch (Exception e) {
+
+                }
             }
         });
 

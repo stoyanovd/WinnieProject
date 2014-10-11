@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.WinnieProject.transfers.ToPhone;
@@ -83,6 +84,14 @@ public class UserInfo extends Activity {
                     intent.setClass(getApplicationContext(), ToPhone.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+        final CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 

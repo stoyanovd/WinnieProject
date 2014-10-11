@@ -38,13 +38,17 @@ public class ToPhone extends Activity {
         final TextView phoneNumber = (TextView) findViewById(R.id.phoneNumber);
         phoneNumber.setText(getIntent().getStringExtra("phoneNum"));
 
-        final EditText sum = (EditText) findViewById(R.id.sum);
-        Button buttonPay = (Button) findViewById(R.id.buttonTransferToPhone);
+        final EditText sum = (EditText) findViewById(R.id.sumToPhone);
+        Button buttonPay = (Button) findViewById(R.id.buttonTransefToPhoneEnd);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BigDecimal sumTransfer = new BigDecimal(sum.getText().toString());
-                makeTransfer(sumTransfer, phoneNumber.getText().toString());
+                try {
+                    BigDecimal sumTransfer = new BigDecimal(sum.getText().toString());
+                    makeTransfer(sumTransfer, phoneNumber.getText().toString());
+                } catch (Exception e) {
+
+                }
             }
         });
 
