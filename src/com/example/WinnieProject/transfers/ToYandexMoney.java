@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.example.WinnieProject.R;
+import com.example.WinnieProject.RequestToDB;
 
 import java.math.BigDecimal;
 
@@ -39,7 +40,7 @@ public class ToYandexMoney extends Activity {
         refreshBalance();
 
         final TextView yandexMoneyNumber = (TextView) findViewById(R.id.yandexMoneyNumber);
-        yandexMoneyNumber.setText(getIntent().getStringExtra("yandexMoneyNum"));
+        yandexMoneyNumber.setText(getIntent().getStringExtra(RequestToDB.YANDEX_MONEY_NUMBER));
 
         final EditText sum = (EditText) findViewById(R.id.sumToYandexMoney);
         Button buttonPay = (Button) findViewById(R.id.buttonTransferToYandexMoneyEnd);
@@ -55,5 +56,11 @@ public class ToYandexMoney extends Activity {
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshBalance();
     }
 }

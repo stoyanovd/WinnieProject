@@ -32,6 +32,8 @@ public class UserInfo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_about_user);
 
+        refreshBalance();
+
         TextView name = (TextView) findViewById(R.id.userName);
         TextView numberYandexMoney = (TextView) findViewById(R.id.numberYandexMoney);
         TextView numberVK = (TextView) findViewById(R.id.numberVK);
@@ -39,10 +41,10 @@ public class UserInfo extends Activity {
         ImageView picture = (ImageView) findViewById(R.id.imageViewInfo);
 
 
-        name.setText(getIntent().getStringExtra("name"));
-        numberYandexMoney.setText(getIntent().getStringExtra("yandexMoneyNum"));
-        numberVK.setText(getIntent().getStringExtra("vkId"));
-        numberPhone.setText(getIntent().getStringExtra("phoneNum"));
+        name.setText(getIntent().getStringExtra(RequestToDB.NAME));
+        numberYandexMoney.setText(getIntent().getStringExtra(RequestToDB.YANDEX_MONEY_NUMBER));
+        numberVK.setText(getIntent().getStringExtra(RequestToDB.VK_ID));
+        numberPhone.setText(getIntent().getStringExtra(RequestToDB.PHONE_NUMBER));
 
         // /*TODO хз как правильно*/picture.setImageResource(getIntent().getIntExtra("pictureId",0));
 
@@ -53,7 +55,7 @@ public class UserInfo extends Activity {
         buttonTransferToYandexMoney.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String count = getIntent().getStringExtra("yandexMoneyNum");
+                String count = getIntent().getStringExtra(RequestToDB.YANDEX_MONEY_NUMBER);
                 if (count.equals("Не указан")) {
                     //missing yandexMoney
 
@@ -61,7 +63,7 @@ public class UserInfo extends Activity {
 
                 {
                     Intent intent = new Intent();
-                    intent.putExtra("yandeMoneyNum", count);
+                    intent.putExtra(RequestToDB.YANDEX_MONEY_NUMBER, count);
                     intent.setClass(getApplicationContext(), ToYandexMoney.class);
                     startActivity(intent);
                 }
@@ -72,7 +74,7 @@ public class UserInfo extends Activity {
         buttonTransferToPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String count = getIntent().getStringExtra("phoneNum");
+                String count = getIntent().getStringExtra(RequestToDB.PHONE_NUMBER);
                 if (count.equals("Не указан")) {
                     //missing phoneNum
 
@@ -80,7 +82,7 @@ public class UserInfo extends Activity {
 
                 {
                     Intent intent = new Intent();
-                    intent.putExtra("phoneNum", count);
+                    intent.putExtra(RequestToDB.PHONE_NUMBER, count);
                     intent.setClass(getApplicationContext(), ToPhone.class);
                     startActivity(intent);
                 }
@@ -88,6 +90,7 @@ public class UserInfo extends Activity {
         });
 
         final CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
+        checkBox.setChecked(getIntent().getBooleanExtra(RequestToDB.IS_FAVORITE, false));
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,5 +98,11 @@ public class UserInfo extends Activity {
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshBalance();
     }
 }
