@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.WinnieProject.R;
+import com.example.WinnieProject.RequestToDB;
 import com.example.WinnieProject.User;
 import com.example.WinnieProject.UserInfo;
 import com.example.WinnieProject.adapters.UserAdapter;
@@ -35,10 +36,20 @@ public class VKFriends extends Activity {
         balance.setText(getBalance());
     }
 
+    private ArrayList<User> getVKFriendUsers() {
+        ArrayList<User> userArrayList = new ArrayList<User>();
+        //find friends in DB
+
+        userArrayList.add(new User("Вася", "vk.com/id123", "4100014255715", "+79012345678", 0, false));
+        userArrayList.add(new User("Петя", "vk.com/id123", "4100014255715", "+79012345678", 0, false));
+        userArrayList.add(new User("Леха", "vk.com/id123", "4100014255715", "+79012345678", 0, false));
+        return userArrayList;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.list_friends_in_vk);
 
         refreshBalance();
@@ -47,11 +58,12 @@ public class VKFriends extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent();
-                intent.putExtra("phoneNum", users.get(i).phoneNumber);
-                intent.putExtra("name", users.get(i).name);
-                intent.putExtra("vkId", users.get(i).vkId);
-                intent.putExtra("yandexMoneyNum", users.get(i).yandexMoneyNumber);
-                intent.putExtra("pictureId", users.get(i).pictureId);
+                intent.putExtra(RequestToDB.PHONE_NUMBER, users.get(i).phoneNumber);
+                intent.putExtra(RequestToDB.NAME, users.get(i).name);
+                intent.putExtra(RequestToDB.VK_ID, users.get(i).vkId);
+                intent.putExtra(RequestToDB.YANDEX_MONEY_NUMBER, users.get(i).yandexMoneyNumber);
+                intent.putExtra(RequestToDB.PICTURE_ID, users.get(i).pictureId);
+                intent.putExtra(RequestToDB.IS_FAVORITE, users.get(i).isFavorite);
                 intent.setClass(getApplicationContext(), UserInfo.class);
                 startActivity(intent);
             }
@@ -61,17 +73,19 @@ public class VKFriends extends Activity {
     }
 
     private void showFriends() {
-        ArrayList<User> userArrayList = new ArrayList<User>();
-        //find friends in DB
 
-        userArrayList.add(new User("Вася", "vk.com/id123", "4100014255715", "+79012345678", 0));
-        userArrayList.add(new User("Петя", "vk.com/id123", "4100014255715", "+79012345678", 0));
-        userArrayList.add(new User("Леха", "vk.com/id123", "4100014255715", "+79012345678", 0));
 
-        users = userArrayList;
+        users = getVKFriendUsers();
         arrayAdapter = new UserAdapter(getApplicationContext(), users);
         listView_friends = (ListView) findViewById(R.id.listViewVK);
         listView_friends.setAdapter(arrayAdapter);
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshBalance();
+    }
+
 }

@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.example.WinnieProject.R;
+import com.example.WinnieProject.RequestToDB;
 
 import java.math.BigDecimal;
 
@@ -36,7 +37,7 @@ public class ToPhone extends Activity {
         setContentView(R.layout.transfer_to_phone);
         refreshBalance();
         final TextView phoneNumber = (TextView) findViewById(R.id.phoneNumber);
-        phoneNumber.setText(getIntent().getStringExtra("phoneNum"));
+        phoneNumber.setText(getIntent().getStringExtra(RequestToDB.PHONE_NUMBER));
 
         final EditText sum = (EditText) findViewById(R.id.sumToPhone);
         Button buttonPay = (Button) findViewById(R.id.buttonTransefToPhoneEnd);
@@ -53,4 +54,11 @@ public class ToPhone extends Activity {
         });
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshBalance();
+    }
+
 }
