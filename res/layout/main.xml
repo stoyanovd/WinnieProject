@@ -19,15 +19,6 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="0.00 Руб"
                 android:id="@+id/MyBalanceMain"/>
-        <Space
-                android:layout_width="200px"
-                android:layout_height="20px"
-                />
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Выйти"
-                android:id="@+id/buttonOut" android:layout_gravity="right"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
