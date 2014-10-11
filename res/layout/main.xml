@@ -4,10 +4,79 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
-    <TextView
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/MyBalanceTextView" android:text="Баланс: " android:textIsSelectable="false"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="0.00 Руб"
+                android:id="@+id/MyBalanceMain"/>
+        <Space
+                android:layout_width="200px"
+                android:layout_height="20px"
+                />
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Выйти"
+                android:id="@+id/buttonOut" android:layout_gravity="right"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello World, AuthActivity"
-            />
+            android:layout_height="fill_parent">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/findId" android:layout_weight="1"/>
+            <Button
+                    android:layout_width="103dp"
+                    android:layout_height="wrap_content"
+                    android:text="отправить не другу"
+                    android:id="@+id/buttonSendToFriend" android:layout_weight="0.1"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Найти в Популярных"
+                    android:id="@+id/buttonFindInFavorites"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Найти в ВК"
+                    android:id="@+id/buttonFindInVK"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Найти в контактах"
+                    android:id="@+id/buttonFindInContacts"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
 
