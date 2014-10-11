@@ -64,7 +64,9 @@ public class VKFriends extends Activity {
         ArrayList<User> userArrayList = new ArrayList<User>();
         //find friends in DB
 
-        userArrayList.add(new User());
+        userArrayList.add(new User("Вася", "vk.com/id123", "4100014255715", "+79012345678", 0));
+        userArrayList.add(new User("Петя", "vk.com/id123", "4100014255715", "+79012345678", 0));
+        userArrayList.add(new User("Леха", "vk.com/id123", "4100014255715", "+79012345678", 0));
 
         users = userArrayList;
         arrayAdapter = new UserAdapter(getApplicationContext(), users);

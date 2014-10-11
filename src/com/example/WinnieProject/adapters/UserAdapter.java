@@ -33,9 +33,8 @@ public class UserAdapter extends ArrayAdapter<User> {
         textView.setTextColor(Color.RED);
         textView.setTextSize(20);
         ImageView imageView = (ImageView) view.findViewById(R.id.imageViewUser);
-        textView.setText("ФИО:" + user.name + "\n");
-
-
+        textView.setText("ФИО:" + user.name + "\nТел.:" + user.phoneNumber + "\nYandexMoney:" + user.yandexMoneyNumber);
+        return view;
     }
 
 }

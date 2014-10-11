@@ -18,5 +18,13 @@ public class User {
         pictureId = 0;
     }
 
+    public User(String name, String vkId, String yandexMoneyNumber, String phoneNumber, int pictureId) {
+        this.phoneNumber = phoneNumber;
+        this.vkId = vkId;
+        this.yandexMoneyNumber = yandexMoneyNumber;
+        this.name = name;
+        this.pictureId = pictureId;
+    }
+
 
 }
