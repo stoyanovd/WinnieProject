@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
 import com.example.WinnieProject.adapters.UserAdapter;
+import com.example.WinnieProject.db_protocol.MyDatabaseHelper;
 import com.example.WinnieProject.grouplist.Contacts;
 import com.example.WinnieProject.grouplist.Favorites;
 import com.example.WinnieProject.grouplist.VKFriends;
@@ -213,5 +214,11 @@ public class MainActivity extends Activity {
         super.onResume();
         refreshBalance();
     }
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		MyDatabaseHelper.closeAll();
+	}
 
 }
