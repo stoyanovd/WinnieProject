@@ -50,6 +50,7 @@ public class UsersDataSource {
 		Cursor cursor = database.query(MyDatabaseHelper.DATABASE_NAME,
 				User.allFields, selection, null, null, null, null);
 		cursor.moveToFirst();
+		
 		while (!cursor.isAfterLast()) {
 			User user = cursorToUser(cursor);
 			users.add(user);
