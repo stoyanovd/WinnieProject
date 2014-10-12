@@ -8,7 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
 import com.example.WinnieProject.adapters.UserAdapter;
-import com.example.WinnieProject.db_protocol.MyDatabaseHelper;
+import com.example.WinnieProject.db_protocol.UsersDataSource;
 import com.example.WinnieProject.grouplist.Contacts;
 import com.example.WinnieProject.grouplist.Favorites;
 import com.example.WinnieProject.grouplist.VKFriends;
@@ -26,7 +26,9 @@ public class MainActivity extends Activity {
     private ListView listView_friends;
     private ArrayAdapter<User> arrayAdapter;
 
-    private String getBalance() {
+	public static UsersDataSource dataSource;
+
+	private String getBalance() {
 
         return "0.00Руб";
     }
@@ -71,13 +73,18 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         //Override BACK
 
-        refreshBalance();
+		dataSource = new UsersDataSource(this.getApplicationContext());
+		dataSource.open();
+
+		//run database
+
+		refreshBalance();
 
         Button buttonFindInFavorites = (Button) findViewById(R.id.buttonFindInFavorites);
         Button buttonFindInVKFriends = (Button) findViewById(R.id.buttonFindInVK);
@@ -212,13 +219,14 @@ public class MainActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-        refreshBalance();
+		dataSource.open();
+		refreshBalance();
     }
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		MyDatabaseHelper.closeAll();
+		dataSource.close();
 	}
 
 }

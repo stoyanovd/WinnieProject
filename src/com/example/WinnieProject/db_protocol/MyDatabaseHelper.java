@@ -49,6 +49,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase database) {
 		database.execSQL(DATABASE_CREATE);
+
+		//------------------------------------------
+		//because of test
+
+		DatabaseSafer.addUser(new User("Вася", User.noFilled, "4100014255715", "+79012345678", 0, false));
+		DatabaseSafer.addUser(new User("Петя", "vk.com/id123", "4100014255715", "+79012345678", 0, false));
+		DatabaseSafer.addUser(new User("Леха", "vk.com/id123", "4100014255715", "+79012345678", 0, false));
+
+		//------------------------------------------
 	}
 
 	@Override
@@ -57,9 +66,4 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	public static void closeAll() {
-		if (sInstance != null) {
-			sInstance.close();
-		}
-	}
 }

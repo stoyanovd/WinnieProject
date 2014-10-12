@@ -8,10 +8,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
 import com.example.WinnieProject.R;
-import com.example.WinnieProject.RequestToDB;
 import com.example.WinnieProject.User;
 import com.example.WinnieProject.UserInfo;
 import com.example.WinnieProject.adapters.UserAdapter;
+import com.example.WinnieProject.db_protocol.DatabaseSafer;
 
 import java.util.ArrayList;
 
@@ -46,14 +46,8 @@ public class Favorites extends Activity {
     }
 
     private ArrayList<User> getFavoriteUsers() {
-        ArrayList<User> userArrayList = new ArrayList<User>();
-        //find friends in DB
-
-        userArrayList.add(new User("Вася", User.noFilled, "4100014255715", "+79012345678", 0, true));
-        userArrayList.add(new User("Петя", "vk.com/id123", "4100014255715", "+79012345678", 0, true));
-        userArrayList.add(new User("Леха", "vk.com/id123", "4100014255715", "+79012345678", 0, true));
-        return userArrayList;
-    }
+		return new ArrayList<User>(DatabaseSafer.getUsersFromFavourites());
+	}
 
 
     @Override
@@ -66,13 +60,9 @@ public class Favorites extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent();
-                intent.putExtra(RequestToDB.PHONE_NUMBER, users.get(i).phoneNumber);
-                intent.putExtra(RequestToDB.NAME, users.get(i).name);
-                intent.putExtra(RequestToDB.VK_ID, users.get(i).vkId);
-                intent.putExtra(RequestToDB.YANDEX_MONEY_NUMBER, users.get(i).yandexMoneyNumber);
-                intent.putExtra(RequestToDB.PICTURE_ID, users.get(i).pictureId);
-                intent.putExtra(RequestToDB.IS_FAVORITE, users.get(i).isFavorite);
-                intent.setClass(getApplicationContext(), UserInfo.class);
+				users.get(i).putToIntent(intent);
+
+				intent.setClass(getApplicationContext(), UserInfo.class);
                 startActivity(intent);
             }
         });

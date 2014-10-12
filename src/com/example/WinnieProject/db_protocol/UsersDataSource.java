@@ -45,12 +45,12 @@ public class UsersDataSource {
 		//do nothing
 	}
 
-	public List<User> getUsersWithSelection(String selection) {
+	protected List<User> getUsersWithSelection(String selection) {
 		List<User> users = new ArrayList<User>();
 		Cursor cursor = database.query(MyDatabaseHelper.DATABASE_NAME,
 				User.allFields, selection, null, null, null, null);
 		cursor.moveToFirst();
-		
+
 		while (!cursor.isAfterLast()) {
 			User user = cursorToUser(cursor);
 			users.add(user);
@@ -59,22 +59,6 @@ public class UsersDataSource {
 		cursor.close();
 		return users;
 
-	}
-
-	public List<User> getUsersAll() {
-		return getUsersWithSelection(null);
-	}
-
-	public List<User> getUsersVK() {
-		return getUsersWithSelection(User.cvkId + " is not null");
-	}
-
-	public List<User> getUsersPhones() {
-		return getUsersWithSelection(User.cPhoneNumber + " is not null");
-	}
-
-	public List<User> getUsersFavourites() {
-		return getUsersWithSelection(User.cIsFavorite + " != 0");
 	}
 
 	private User cursorToUser(Cursor cursor) {

@@ -1,6 +1,7 @@
 package com.example.WinnieProject;
 
 import android.content.ContentValues;
+import android.content.Intent;
 
 /**
  * Created by Юрий on 11.10.2014.
@@ -57,4 +58,17 @@ public class User {
 		return contentValues;
 	}
 
+	public void putToIntent(Intent intent) {
+		intent.putExtra(cPhoneNumber, phoneNumber);
+		intent.putExtra(cvkId, vkId);
+		intent.putExtra(cYandexMoneyNumber, yandexMoneyNumber);
+		intent.putExtra(cName, name);
+		intent.putExtra(cIsFavorite, isFavorite);
+		intent.putExtra(cPictureId, pictureId);
+	}
+
+	public static User getFromIntent(Intent intent) {
+		return new User(intent.getStringExtra(cName), intent.getStringExtra(cvkId), intent.getStringExtra(cYandexMoneyNumber),
+				intent.getStringExtra(cPhoneNumber), intent.getIntExtra(cPictureId, 0), (intent.getIntExtra(cIsFavorite, 0) > 0));
+	}
 }
