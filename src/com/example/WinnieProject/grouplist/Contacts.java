@@ -3,11 +3,10 @@ package com.example.WinnieProject.grouplist;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.example.WinnieProject.R;
 import com.example.WinnieProject.RequestToDB;
 import com.example.WinnieProject.User;
@@ -44,6 +43,17 @@ public class Contacts extends Activity {
         userArrayList.add(new User("Леха", "vk.com/id123", "4100014255715", "+79012345678", 0, false));
         return userArrayList;
     }
+
+    private ArrayList<User> getTrueUsers(ArrayList<User> list, String sub) {
+        ArrayList<User> ans = new ArrayList<User>();
+        for (User user : list) {
+            if (user.name.toUpperCase().contains(sub.toUpperCase()) || user.yandexMoneyNumber.toUpperCase().contains(sub.toUpperCase()) || user.phoneNumber.toUpperCase().contains(sub.toUpperCase())) {
+                ans.add(user);
+            }
+        }
+        return ans;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,12 +76,32 @@ public class Contacts extends Activity {
             }
         });
 
+        EditText editText = (EditText) findViewById(R.id.findContactsFriendWithSub);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                showFriends();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                showFriends();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                showFriends();
+            }
+        });
 
     }
 
     private void showFriends() {
         users = getContactsUsers();
-        arrayAdapter = new UserAdapter(getApplicationContext(), users);
+        EditText editText = (EditText) findViewById(R.id.findContactsFriendWithSub);
+        ArrayList<User> trueUsers = getTrueUsers(users, editText.getText().toString());
+
+        arrayAdapter = new UserAdapter(getApplicationContext(), trueUsers);
         listView_friends = (ListView) findViewById(R.id.listViewContacts);
         listView_friends.setAdapter(arrayAdapter);
 

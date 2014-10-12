@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.WinnieProject.R;
 import com.example.WinnieProject.RequestToDB;
@@ -41,6 +42,9 @@ public class ToYandexMoney extends Activity {
 
         final TextView yandexMoneyNumber = (TextView) findViewById(R.id.yandexMoneyNumber);
         yandexMoneyNumber.setText(getIntent().getStringExtra(RequestToDB.YANDEX_MONEY_NUMBER));
+
+        ImageView imageViewYandex = (ImageView) findViewById(R.id.imageViewTransferYandexMoney);
+        imageViewYandex.setImageResource(this.getResources().getIdentifier("yandex", "drawable", this.getPackageName()));
 
         final EditText sum = (EditText) findViewById(R.id.sumToYandexMoney);
         Button buttonPay = (Button) findViewById(R.id.buttonTransferToYandexMoneyEnd);

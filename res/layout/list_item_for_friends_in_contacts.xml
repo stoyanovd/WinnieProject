@@ -3,20 +3,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content" android:measureWithLargestChild="false" android:longClickable="false"
+        >
 
+    <Space
+            android:layout_width="0dp"
+            android:layout_height="20px"
+            android:layout_weight="@integer/spa"/>
     <ImageView
-            android:layout_width="70dp"
+            android:layout_width="0dp"
             android:layout_height="70dp"
-            android:id="@+id/imageViewUser"/>
+            android:id="@+id/imageViewUser" android:layout_weight="20"/>
+    <Space android:layout_width="0dp" android:layout_height="20px" android:id="@+id/space"
+           android:layout_weight="@integer/spa"/>
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/textViewUser"/>
-    <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            />
+            android:id="@+id/textViewUser" android:layout_weight="41"/>
+    <Space android:layout_width="0dp" android:layout_height="20px" android:id="@+id/space2"
+           android:layout_weight="@integer/spa"/>
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageViewForVK" android:layout_weight="9"/>
+    <Space android:layout_width="0dp" android:layout_height="20px" android:id="@+id/space3"
+           android:layout_weight="@integer/spa"/>
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageViewForYandex" android:layout_weight="9" android:adjustViewBounds="false"/>
+    <Space android:layout_width="0dp" android:layout_height="20px" android:id="@+id/space4"
+           android:layout_weight="@integer/spa"/>
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageViewForContact" android:longClickable="false" android:layout_weight="9"/>
+    <Space android:layout_width="0dp" android:layout_height="20px" android:id="@+id/space5"
+           android:layout_weight="@integer/spa"/>
 </LinearLayout>

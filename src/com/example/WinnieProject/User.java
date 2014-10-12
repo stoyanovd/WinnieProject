@@ -4,6 +4,7 @@ package com.example.WinnieProject;
  * Created by Юрий on 11.10.2014.
  */
 public class User {
+    public static String noFilled = "Не указан";
     public String phoneNumber;
     public String vkId;
     public String yandexMoneyNumber;
@@ -12,10 +13,10 @@ public class User {
     public int pictureId;
 
     public User() {
-        phoneNumber = "Не указан";
-        vkId = "Не указан";
-        name = "Не указан";
-        yandexMoneyNumber = "Не указан";
+        phoneNumber = noFilled;
+        vkId = noFilled;
+        name = noFilled;
+        yandexMoneyNumber = noFilled;
         pictureId = 0;
         isFavorite = false;
     }

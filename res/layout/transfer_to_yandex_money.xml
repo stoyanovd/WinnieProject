@@ -21,9 +21,10 @@
                       android:layout_height="wrap_content">
             <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
                           android:layout_height="fill_parent">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                          android:textAppearance="?android:attr/textAppearanceLarge"
-                          android:text="Отправить на ЯД: " android:id="@+id/textView"/>
+                <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/imageViewTransferYandexMoney"/>
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/yandexMoneyNumber"
                           android:text="445556456546546"/>
