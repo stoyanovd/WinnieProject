@@ -8,12 +8,14 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
 import com.example.WinnieProject.adapters.UserAdapter;
+import com.example.WinnieProject.db_protocol.DatabaseSafer;
 import com.example.WinnieProject.db_protocol.UsersDataSource;
 import com.example.WinnieProject.grouplist.Contacts;
 import com.example.WinnieProject.grouplist.Favorites;
 import com.example.WinnieProject.grouplist.VKFriends;
 import com.example.WinnieProject.transfers.ToPhone;
 import com.example.WinnieProject.transfers.ToYandexMoney;
+import com.vk.sdk.VKUIHelper;
 
 import java.util.ArrayList;
 
@@ -21,12 +23,11 @@ import java.util.ArrayList;
  * Created by Юрий on 11.10.2014.
  */
 public class MainActivity extends Activity {
+    public static UsersDataSource dataSource;
     private int numViewSwitch = 0;
     private ArrayList<User> users = new ArrayList<User>();
     private ListView listView_friends;
     private ArrayAdapter<User> arrayAdapter;
-
-	public static UsersDataSource dataSource;
 
 	private String getBalance() {
 
@@ -60,6 +61,7 @@ public class MainActivity extends Activity {
     }
 
     private boolean isPhone(String s) {
+        if (s.length() == 0) return false;
         if (s.charAt(0) != '+' || s.length() != 12) return false;
         for (int i = 1; i < s.length(); i++)
             if (s.charAt(i) < '0' || s.charAt(i) > '9') return false;
@@ -81,6 +83,15 @@ public class MainActivity extends Activity {
 
 		dataSource = new UsersDataSource(this.getApplicationContext());
 		dataSource.open();
+
+        //------------------------------------------
+        //because of test
+
+        DatabaseSafer.addUser(new User("Вася", "vk.com/id123", "4100014255715", "+79012345678", 0, false));
+        DatabaseSafer.addUser(new User("Петя", "vk.com/id123", "4100014255715", "+79012345678", 0, false));
+        DatabaseSafer.addUser(new User("Леха", "vk.com/id123", "4100014255715", "+79012345678", 0, false));
+
+        //------------------------------------------
 
 		//run database
 
@@ -221,12 +232,19 @@ public class MainActivity extends Activity {
         super.onResume();
 		dataSource.open();
 		refreshBalance();
+        VKUIHelper.onResume(this);
     }
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		dataSource.close();
-	}
+        VKUIHelper.onDestroy(this);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        VKUIHelper.onActivityResult(requestCode, resultCode, data);
+    }
 }

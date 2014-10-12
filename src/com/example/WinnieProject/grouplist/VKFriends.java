@@ -36,8 +36,8 @@ public class VKFriends extends Activity {
     }
 
     private ArrayList<User> getVKFriendUsers() {
-		return new ArrayList<User>(DatabaseSafer.getUsersWithVK());
-	}
+        return new ArrayList<User>(DatabaseSafer.getUsersWithVK());
+    }
 
     private ArrayList<User> getTrueUsers(ArrayList<User> list, String sub) {
         ArrayList<User> ans = new ArrayList<User>();

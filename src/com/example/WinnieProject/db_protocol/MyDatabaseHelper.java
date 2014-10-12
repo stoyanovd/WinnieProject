@@ -11,11 +11,7 @@ import com.example.WinnieProject.User;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
-	private static MyDatabaseHelper sInstance;
-	private static final int DATABASE_VERSION = 1;
-
 	public static final String DATABASE_NAME = "users_db";
-
 	private static final String DATABASE_CREATE = "create table "
 			+ DATABASE_NAME + "(" + User.cID + " integer primary key autoincrement, " +
 			User.cPhoneNumber + " text, " +
@@ -25,39 +21,33 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 			User.cIsFavorite + " integer, " +
 			User.cPictureId + " integer" +
 			");";
+    private static final int DATABASE_VERSION = 1;
+    private static MyDatabaseHelper sInstance;
 
-
-	public static MyDatabaseHelper getInstance(Context context) {
-
-		// Use the application context, which will ensure that you
-		// don't accidentally leak an Activity's context.
-		// See this article for more information: http://bit.ly/6LRzfx
-		if (sInstance == null) {
-			sInstance = new MyDatabaseHelper(context.getApplicationContext());
-		}
-		return sInstance;
-	}
 
 	/**
-	 * Constructor should be private to prevent direct instantiation.
-	 * make call to static method "getInstance()" instead.
-	 */
-	private MyDatabaseHelper(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-	}
+     * Constructor should be private to prevent direct instantiation.
+     * make call to static method "getInstance()" instead.
+     */
+    private MyDatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public static MyDatabaseHelper getInstance(Context context) {
+
+        // Use the application context, which will ensure that you
+        // don't accidentally leak an Activity's context.
+        // See this article for more information: http://bit.ly/6LRzfx
+        if (sInstance == null) {
+            sInstance = new MyDatabaseHelper(context.getApplicationContext());
+        }
+        return sInstance;
+    }
 
 	@Override
 	public void onCreate(SQLiteDatabase database) {
 		database.execSQL(DATABASE_CREATE);
 
-		//------------------------------------------
-		//because of test
-
-		DatabaseSafer.addUser(new User("Вася", User.noFilled, "4100014255715", "+79012345678", 0, false));
-		DatabaseSafer.addUser(new User("Петя", "vk.com/id123", "4100014255715", "+79012345678", 0, false));
-		DatabaseSafer.addUser(new User("Леха", "vk.com/id123", "4100014255715", "+79012345678", 0, false));
-
-		//------------------------------------------
 	}
 
 	@Override
