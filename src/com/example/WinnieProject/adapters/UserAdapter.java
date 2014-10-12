@@ -26,14 +26,30 @@ public class UserAdapter extends ArrayAdapter<User> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        User user = getItem(position);
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final User user = getItem(position);
+        final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.list_item_for_friends_in_contacts, null);
         TextView textView = (TextView) view.findViewById(R.id.textViewUser);
         textView.setTextColor(Color.RED);
         textView.setTextSize(20);
+        textView.setText(user.name);
+
         ImageView imageView = (ImageView) view.findViewById(R.id.imageViewUser);
-        textView.setText("ФИО:" + user.name + "\nТел.:" + user.phoneNumber + "\nYandexMoney:" + user.yandexMoneyNumber);
+        imageView.setImageResource(context.getResources().getIdentifier("p" + user.pictureId, "drawable", context.getPackageName()));
+
+        ImageView imageView1 = (ImageView) view.findViewById(R.id.imageViewForVK);
+        imageView1.setImageResource(context.getResources().getIdentifier("vk", "drawable", context.getPackageName()));
+        if (user.vkId.equals(user.noFilled)) imageView1.setVisibility(View.INVISIBLE);
+
+        ImageView imageView2 = (ImageView) view.findViewById(R.id.imageViewForContact);
+        imageView2.setImageResource(context.getResources().getIdentifier("contact", "drawable", context.getPackageName()));
+        if (user.phoneNumber.equals(user.noFilled)) imageView2.setVisibility(View.INVISIBLE);
+
+        ImageView imageView3 = (ImageView) view.findViewById(R.id.imageViewForYandex);
+        imageView3.setImageResource(context.getResources().getIdentifier("yandex", "drawable", context.getPackageName()));
+        if (user.phoneNumber.equals(user.noFilled)) imageView3.setVisibility(View.INVISIBLE);
+
+
         return view;
     }
 

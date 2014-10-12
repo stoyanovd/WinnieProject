@@ -3,11 +3,10 @@ package com.example.WinnieProject.grouplist;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.example.WinnieProject.R;
 import com.example.WinnieProject.RequestToDB;
 import com.example.WinnieProject.User;
@@ -36,11 +35,21 @@ public class Favorites extends Activity {
         balance.setText(getBalance());
     }
 
+    private ArrayList<User> getTrueUsers(ArrayList<User> list, String sub) {
+        ArrayList<User> ans = new ArrayList<User>();
+        for (User user : list) {
+            if (user.name.toUpperCase().contains(sub.toUpperCase()) || user.yandexMoneyNumber.toUpperCase().contains(sub.toUpperCase()) || user.phoneNumber.toUpperCase().contains(sub.toUpperCase())) {
+                ans.add(user);
+            }
+        }
+        return ans;
+    }
+
     private ArrayList<User> getFavoriteUsers() {
         ArrayList<User> userArrayList = new ArrayList<User>();
         //find friends in DB
 
-        userArrayList.add(new User("Вася", "vk.com/id123", "4100014255715", "+79012345678", 0, true));
+        userArrayList.add(new User("Вася", User.noFilled, "4100014255715", "+79012345678", 0, true));
         userArrayList.add(new User("Петя", "vk.com/id123", "4100014255715", "+79012345678", 0, true));
         userArrayList.add(new User("Леха", "vk.com/id123", "4100014255715", "+79012345678", 0, true));
         return userArrayList;
@@ -68,6 +77,24 @@ public class Favorites extends Activity {
             }
         });
 
+        EditText editText = (EditText) findViewById(R.id.findFavoriteFriendWithSub);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                showFriends();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                showFriends();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                showFriends();
+            }
+        });
+
 
     }
 
@@ -75,7 +102,10 @@ public class Favorites extends Activity {
 
 
         users = getFavoriteUsers();
-        arrayAdapter = new UserAdapter(getApplicationContext(), users);
+        EditText editText = (EditText) findViewById(R.id.findFavoriteFriendWithSub);
+        ArrayList<User> trueUsers = getTrueUsers(users, editText.getText().toString());
+
+        arrayAdapter = new UserAdapter(getApplicationContext(), trueUsers);
         listView_friends = (ListView) findViewById(R.id.listViewFavorites);
         listView_friends.setAdapter(arrayAdapter);
 

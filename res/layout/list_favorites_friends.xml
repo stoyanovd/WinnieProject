@@ -17,9 +17,13 @@
                       android:textAppearance="?android:attr/textAppearanceLarge" android:text="0.00 Руб"
                       android:id="@+id/MyBalanceListFavorites"/>
         </LinearLayout>
-        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
                       android:layout_height="fill_parent">
-            <ListView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/findFavoriteFriendWithSub"/>
+            <ListView android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:id="@+id/listViewFavorites"/>
         </LinearLayout>
     </LinearLayout>

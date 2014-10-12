@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.WinnieProject.R;
 import com.example.WinnieProject.RequestToDB;
@@ -38,6 +39,9 @@ public class ToPhone extends Activity {
         refreshBalance();
         final TextView phoneNumber = (TextView) findViewById(R.id.phoneNumber);
         phoneNumber.setText(getIntent().getStringExtra(RequestToDB.PHONE_NUMBER));
+
+        ImageView imageViewContact = (ImageView) findViewById(R.id.imageViewTransferPhone);
+        imageViewContact.setImageResource(this.getResources().getIdentifier("contact", "drawable", this.getPackageName()));
 
         final EditText sum = (EditText) findViewById(R.id.sumToPhone);
         Button buttonPay = (Button) findViewById(R.id.buttonTransefToPhoneEnd);

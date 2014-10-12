@@ -23,51 +23,70 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
             <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/findId" android:layout_weight="1"/>
             <Button
-                    android:layout_width="103dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="отправить не другу"
-                    android:id="@+id/buttonSendToFriend" android:layout_weight="0.1"/>
+                    android:text="отправить"
+                    android:id="@+id/buttonSent"/>
         </LinearLayout>
+    </LinearLayout>
+    <ViewSwitcher
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewSwitcher">
         <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-            <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Найти в Популярных"
-                    android:id="@+id/buttonFindInFavorites"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-            <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Найти в ВК"
-                    android:id="@+id/buttonFindInVK"/>
+                android:layout_height="fill_parent">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Найти в Популярных"
+                        android:id="@+id/buttonFindInFavorites"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Найти в ВК"
+                        android:id="@+id/buttonFindInVK"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Найти в контактах"
+                        android:id="@+id/buttonFindInContacts"/>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
-            <Button
+            <ListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Найти в контактах"
-                    android:id="@+id/buttonFindInContacts"/>
+                    android:id="@+id/listViewInSwitcher" android:focusableInTouchMode="false"/>
         </LinearLayout>
-    </LinearLayout>
+    </ViewSwitcher>
 </LinearLayout>
 
